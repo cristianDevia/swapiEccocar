@@ -1,5 +1,7 @@
 package com.example.starwars.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -67,8 +69,10 @@ public class PlanetsModel implements Serializable {
     @Basic(optional = false)
     @Column(name = "population", nullable = false)
     private int population;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPlanetsId")
     private List<MissionModel> missionModelList;
+    @JsonIgnore
     @OneToMany(mappedBy = "fkPlanetsId")
     private List<PeopleModel> peopleModelList;
 
