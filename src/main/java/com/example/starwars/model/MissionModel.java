@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
         @NamedQuery(name = "MissionModel.findAll", query = "SELECT m FROM MissionModel m"),
         @NamedQuery(name = "MissionModel.findById", query = "SELECT m FROM MissionModel m WHERE m.id = :id"),
         @NamedQuery(name = "MissionModel.findByBeginDate", query = "SELECT m FROM MissionModel m WHERE m.beginDate = :beginDate"),
+        @NamedQuery(name = "MissionModel.findByEndDate", query = "SELECT m FROM MissionModel m WHERE m.endDate = :endDate"),
         @NamedQuery(name = "MissionModel.findByCrew", query = "SELECT m FROM MissionModel m WHERE m.crew = :crew")})
 public class MissionModel implements Serializable {
 
@@ -34,11 +35,15 @@ public class MissionModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "beginDate", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date beginDate;
+    @Basic(optional = false)
+    @Column(name = "endDate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
     @Basic(optional = false)
     @Column(name = "crew", nullable = false)
     private int crew;
@@ -55,21 +60,22 @@ public class MissionModel implements Serializable {
     public MissionModel() {
     }
 
-    public MissionModel(Integer id) {
+    public MissionModel(Long id) {
         this.id = id;
     }
 
-    public MissionModel(Integer id, Date beginDate, int crew) {
+    public MissionModel(Long id, Date beginDate, Date endDate, int crew) {
         this.id = id;
         this.beginDate = beginDate;
+        this.endDate = endDate;
         this.crew = crew;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,6 +85,14 @@ public class MissionModel implements Serializable {
 
     public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getCrew() {

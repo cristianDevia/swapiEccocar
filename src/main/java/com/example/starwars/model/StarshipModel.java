@@ -32,8 +32,7 @@ import javax.persistence.Table;
         @NamedQuery(name = "StarshipModel.findByCostInCredits", query = "SELECT s FROM StarshipModel s WHERE s.costInCredits = :costInCredits"),
         @NamedQuery(name = "StarshipModel.findByLength", query = "SELECT s FROM StarshipModel s WHERE s.length = :length"),
         @NamedQuery(name = "StarshipModel.findByMaxAtmospheringSpeed", query = "SELECT s FROM StarshipModel s WHERE s.maxAtmospheringSpeed = :maxAtmospheringSpeed"),
-        @NamedQuery(name = "StarshipModel.findByMinCrew", query = "SELECT s FROM StarshipModel s WHERE s.minCrew = :minCrew"),
-        @NamedQuery(name = "StarshipModel.findByMaxCrew", query = "SELECT s FROM StarshipModel s WHERE s.maxCrew = :maxCrew"),
+        @NamedQuery(name = "StarshipModel.findByCrew", query = "SELECT s FROM StarshipModel s WHERE s.crew = :crew"),
         @NamedQuery(name = "StarshipModel.findByPassengers", query = "SELECT s FROM StarshipModel s WHERE s.passengers = :passengers"),
         @NamedQuery(name = "StarshipModel.findByCargoCapacity", query = "SELECT s FROM StarshipModel s WHERE s.cargoCapacity = :cargoCapacity"),
         @NamedQuery(name = "StarshipModel.findByConsumables", query = "SELECT s FROM StarshipModel s WHERE s.consumables = :consumables"),
@@ -47,7 +46,7 @@ public class StarshipModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "name", nullable = false, length = 255)
     private String name;
@@ -58,34 +57,31 @@ public class StarshipModel implements Serializable {
     @Column(name = "manufacturer", nullable = false, length = 255)
     private String manufacturer;
     @Basic(optional = false)
-    @Column(name = "cost_in_credits", nullable = false)
-    private int costInCredits;
+    @Column(name = "cost_in_credits", nullable = false, length = 255)
+    private String costInCredits;
     @Basic(optional = false)
-    @Column(name = "length", nullable = false)
-    private double length;
-    @Column(name = "max_atmosphering_speed")
-    private Integer maxAtmospheringSpeed;
+    @Column(name = "length", nullable = false, length = 255)
+    private String length;
+    @Column(name = "max_atmosphering_speed", length = 255)
+    private String maxAtmospheringSpeed;
     @Basic(optional = false)
-    @Column(name = "min_crew", nullable = false)
-    private int minCrew;
+    @Column(name = "crew", nullable = false, length = 255)
+    private String crew;
     @Basic(optional = false)
-    @Column(name = "max_crew", nullable = false)
-    private int maxCrew;
+    @Column(name = "passengers", nullable = false, length = 255)
+    private String passengers;
     @Basic(optional = false)
-    @Column(name = "passengers", nullable = false)
-    private int passengers;
-    @Basic(optional = false)
-    @Column(name = "cargo_capacity", nullable = false)
-    private int cargoCapacity;
+    @Column(name = "cargo_capacity", nullable = false, length = 255)
+    private String cargoCapacity;
     @Basic(optional = false)
     @Column(name = "consumables", nullable = false, length = 255)
     private String consumables;
     @Basic(optional = false)
-    @Column(name = "hyperdrive_rating", nullable = false)
-    private double hyperdriveRating;
+    @Column(name = "hyperdrive_rating", nullable = false, length = 255)
+    private String hyperdriveRating;
     @Basic(optional = false)
-    @Column(name = "mGLT", nullable = false)
-    private int mGLT;
+    @Column(name = "mGLT", nullable = false, length = 255)
+    private String mGLT;
     @Basic(optional = false)
     @Column(name = "starship_class", nullable = false, length = 255)
     private String starshipClass;
@@ -99,19 +95,18 @@ public class StarshipModel implements Serializable {
     public StarshipModel() {
     }
 
-    public StarshipModel(Integer id) {
+    public StarshipModel(Long id) {
         this.id = id;
     }
 
-    public StarshipModel(Integer id, String name, String model, String manufacturer, int costInCredits, double length, int minCrew, int maxCrew, int passengers, int cargoCapacity, String consumables, double hyperdriveRating, int mGLT, String starshipClass) {
+    public StarshipModel(Long id, String name, String model, String manufacturer, String costInCredits, String length, String crew, String passengers, String cargoCapacity, String consumables, String hyperdriveRating, String mGLT, String starshipClass) {
         this.id = id;
         this.name = name;
         this.model = model;
         this.manufacturer = manufacturer;
         this.costInCredits = costInCredits;
         this.length = length;
-        this.minCrew = minCrew;
-        this.maxCrew = maxCrew;
+        this.crew = crew;
         this.passengers = passengers;
         this.cargoCapacity = cargoCapacity;
         this.consumables = consumables;
@@ -120,11 +115,11 @@ public class StarshipModel implements Serializable {
         this.starshipClass = starshipClass;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -152,59 +147,51 @@ public class StarshipModel implements Serializable {
         this.manufacturer = manufacturer;
     }
 
-    public int getCostInCredits() {
+    public String getCostInCredits() {
         return costInCredits;
     }
 
-    public void setCostInCredits(int costInCredits) {
+    public void setCostInCredits(String costInCredits) {
         this.costInCredits = costInCredits;
     }
 
-    public double getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(String length) {
         this.length = length;
     }
 
-    public Integer getMaxAtmospheringSpeed() {
+    public String getMaxAtmospheringSpeed() {
         return maxAtmospheringSpeed;
     }
 
-    public void setMaxAtmospheringSpeed(Integer maxAtmospheringSpeed) {
+    public void setMaxAtmospheringSpeed(String maxAtmospheringSpeed) {
         this.maxAtmospheringSpeed = maxAtmospheringSpeed;
     }
 
-    public int getMinCrew() {
-        return minCrew;
+    public String getCrew() {
+        return crew;
     }
 
-    public void setMinCrew(int minCrew) {
-        this.minCrew = minCrew;
+    public void setCrew(String crew) {
+        this.crew = crew;
     }
 
-    public int getMaxCrew() {
-        return maxCrew;
-    }
-
-    public void setMaxCrew(int maxCrew) {
-        this.maxCrew = maxCrew;
-    }
-
-    public int getPassengers() {
+    public String getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(int passengers) {
+    public void setPassengers(String passengers) {
         this.passengers = passengers;
     }
 
-    public int getCargoCapacity() {
+    public String getCargoCapacity() {
         return cargoCapacity;
     }
 
-    public void setCargoCapacity(int cargoCapacity) {
+    public void setCargoCapacity(String cargoCapacity) {
         this.cargoCapacity = cargoCapacity;
     }
 
@@ -216,19 +203,19 @@ public class StarshipModel implements Serializable {
         this.consumables = consumables;
     }
 
-    public double getHyperdriveRating() {
+    public String getHyperdriveRating() {
         return hyperdriveRating;
     }
 
-    public void setHyperdriveRating(double hyperdriveRating) {
+    public void setHyperdriveRating(String hyperdriveRating) {
         this.hyperdriveRating = hyperdriveRating;
     }
 
-    public int getMGLT() {
+    public String getMGLT() {
         return mGLT;
     }
 
-    public void setMGLT(int mGLT) {
+    public void setMGLT(String mGLT) {
         this.mGLT = mGLT;
     }
 

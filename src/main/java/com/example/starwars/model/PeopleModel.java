@@ -42,16 +42,16 @@ public class PeopleModel implements Serializable {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Basic(optional = false)
         @Column(name = "id", nullable = false)
-        private Integer id;
+        private Long id;
         @Basic(optional = false)
         @Column(name = "name", nullable = false, length = 255)
         private String name;
         @Basic(optional = false)
-        @Column(name = "height", nullable = false)
-        private int height;
+        @Column(name = "height", nullable = false, length = 255)
+        private String height;
         @Basic(optional = false)
-        @Column(name = "mass", nullable = false)
-        private int mass;
+        @Column(name = "mass", nullable = false, length = 255)
+        private String mass;
         @Column(name = "hair_color", length = 255)
         private String hairColor;
         @Basic(optional = false)
@@ -78,11 +78,11 @@ public class PeopleModel implements Serializable {
         public PeopleModel() {
         }
 
-        public PeopleModel(Integer id) {
+        public PeopleModel(Long id) {
                 this.id = id;
         }
 
-        public PeopleModel(Integer id, String name, int height, int mass, String skinColor, String eyeColor, String birthYear) {
+        public PeopleModel(Long id, String name, String height, String mass, String skinColor, String eyeColor, String birthYear) {
                 this.id = id;
                 this.name = name;
                 this.height = height;
@@ -92,11 +92,11 @@ public class PeopleModel implements Serializable {
                 this.birthYear = birthYear;
         }
 
-        public Integer getId() {
+        public Long getId() {
                 return id;
         }
 
-        public void setId(Integer id) {
+        public void setId(Long id) {
                 this.id = id;
         }
 
@@ -108,19 +108,19 @@ public class PeopleModel implements Serializable {
                 this.name = name;
         }
 
-        public int getHeight() {
+        public String getHeight() {
                 return height;
         }
 
-        public void setHeight(int height) {
+        public void setHeight(String height) {
                 this.height = height;
         }
 
-        public int getMass() {
+        public String getMass() {
                 return mass;
         }
 
-        public void setMass(int mass) {
+        public void setMass(String mass) {
                 this.mass = mass;
         }
 

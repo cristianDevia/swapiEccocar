@@ -41,19 +41,19 @@ public class PlanetsModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic(optional = false)
-    @Column(name = "rotation_period", nullable = false)
-    private int rotationPeriod;
+    @Column(name = "rotation_period", nullable = false, length = 255)
+    private String rotationPeriod;
     @Basic(optional = false)
-    @Column(name = "orbital_period", nullable = false)
-    private int orbitalPeriod;
+    @Column(name = "orbital_period", nullable = false, length = 255)
+    private String orbitalPeriod;
     @Basic(optional = false)
-    @Column(name = "diameter", nullable = false)
-    private int diameter;
+    @Column(name = "diameter", nullable = false, length = 255)
+    private String diameter;
     @Basic(optional = false)
     @Column(name = "climate", nullable = false, length = 255)
     private String climate;
@@ -64,11 +64,11 @@ public class PlanetsModel implements Serializable {
     @Column(name = "terrain", nullable = false, length = 255)
     private String terrain;
     @Basic(optional = false)
-    @Column(name = "surface_water", nullable = false)
-    private int surfaceWater;
+    @Column(name = "surface_water", nullable = false, length = 255)
+    private String surfaceWater;
     @Basic(optional = false)
-    @Column(name = "population", nullable = false)
-    private int population;
+    @Column(name = "population", nullable = false, length = 255)
+    private String population;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPlanetsId")
     private List<MissionModel> missionModelList;
@@ -79,11 +79,11 @@ public class PlanetsModel implements Serializable {
     public PlanetsModel() {
     }
 
-    public PlanetsModel(Integer id) {
+    public PlanetsModel(Long id) {
         this.id = id;
     }
 
-    public PlanetsModel(Integer id, String name, int rotationPeriod, int orbitalPeriod, int diameter, String climate, String gravity, String terrain, int surfaceWater, int population) {
+    public PlanetsModel(Long id, String name, String rotationPeriod, String orbitalPeriod, String diameter, String climate, String gravity, String terrain, String surfaceWater, String population) {
         this.id = id;
         this.name = name;
         this.rotationPeriod = rotationPeriod;
@@ -96,11 +96,11 @@ public class PlanetsModel implements Serializable {
         this.population = population;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -112,27 +112,27 @@ public class PlanetsModel implements Serializable {
         this.name = name;
     }
 
-    public int getRotationPeriod() {
+    public String getRotationPeriod() {
         return rotationPeriod;
     }
 
-    public void setRotationPeriod(int rotationPeriod) {
+    public void setRotationPeriod(String rotationPeriod) {
         this.rotationPeriod = rotationPeriod;
     }
 
-    public int getOrbitalPeriod() {
+    public String getOrbitalPeriod() {
         return orbitalPeriod;
     }
 
-    public void setOrbitalPeriod(int orbitalPeriod) {
+    public void setOrbitalPeriod(String orbitalPeriod) {
         this.orbitalPeriod = orbitalPeriod;
     }
 
-    public int getDiameter() {
+    public String getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(int diameter) {
+    public void setDiameter(String diameter) {
         this.diameter = diameter;
     }
 
@@ -160,19 +160,19 @@ public class PlanetsModel implements Serializable {
         this.terrain = terrain;
     }
 
-    public int getSurfaceWater() {
+    public String getSurfaceWater() {
         return surfaceWater;
     }
 
-    public void setSurfaceWater(int surfaceWater) {
+    public void setSurfaceWater(String surfaceWater) {
         this.surfaceWater = surfaceWater;
     }
 
-    public int getPopulation() {
+    public String getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(String population) {
         this.population = population;
     }
 
