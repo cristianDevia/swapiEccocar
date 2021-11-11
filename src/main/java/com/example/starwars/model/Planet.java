@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class Planet {
+
+    private Long id;
     private String name;
     private String rotation_period;
     private String orbital_period;

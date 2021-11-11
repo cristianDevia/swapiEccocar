@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Starship {
+
+    private Long id;
     private String name;
     private String model;
     private String manufacturer;

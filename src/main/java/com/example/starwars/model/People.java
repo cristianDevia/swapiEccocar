@@ -5,6 +5,7 @@ import java.util.List;
 
 public class People {
 
+        private Long id;
         private String name;
         private String height;
         private String mass;

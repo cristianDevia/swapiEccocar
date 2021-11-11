@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class Mission {
 
+    private  Long id;
+
     private LocalDateTime beginDate;
 
     private LocalDateTime endDate;
@@ -14,10 +16,19 @@ public class Mission {
 
     }
 
-    public Mission(LocalDateTime beginDate, LocalDateTime endDate, int crew) {
+    public Mission(Long id, LocalDateTime beginDate, LocalDateTime endDate, int crew) {
+        this.id = id;
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.crew = crew;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getBeginDate() {
