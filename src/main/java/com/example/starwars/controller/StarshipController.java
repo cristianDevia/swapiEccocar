@@ -89,7 +89,7 @@ public class StarshipController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlanet(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteStarship(@PathVariable("id") Long id) {
         try {
             StarshipModel auxStarship = this.starshipService.searchById(id);
             if (auxStarship != null) {
