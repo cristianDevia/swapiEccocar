@@ -87,7 +87,7 @@ public class StarshipModel implements Serializable {
     private String starshipClass;
     @ManyToMany(mappedBy = "starshipModelList")
     private List<PeopleModel> peopleModelList;
-    
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkStarshipId")
     private List<MissionModel> missionModelList;

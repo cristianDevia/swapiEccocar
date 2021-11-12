@@ -21,8 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "planet", catalog = "starwars", schema = "")
-@NamedQueries({
-        @NamedQuery(name = "PlanetModel.findAll", query = "SELECT p FROM PlanetModel p"),
+@NamedQueries({ @NamedQuery(name = "PlanetModel.findAll", query = "SELECT p FROM PlanetModel p"),
         @NamedQuery(name = "PlanetModel.findById", query = "SELECT p FROM PlanetModel p WHERE p.id = :id"),
         @NamedQuery(name = "PlanetModel.findByName", query = "SELECT p FROM PlanetModel p WHERE p.name = :name"),
         @NamedQuery(name = "PlanetModel.findByRotationPeriod", query = "SELECT p FROM PlanetModel p WHERE p.rotationPeriod = :rotationPeriod"),
@@ -32,7 +31,7 @@ import javax.persistence.Table;
         @NamedQuery(name = "PlanetModel.findByGravity", query = "SELECT p FROM PlanetModel p WHERE p.gravity = :gravity"),
         @NamedQuery(name = "PlanetModel.findByTerrain", query = "SELECT p FROM PlanetModel p WHERE p.terrain = :terrain"),
         @NamedQuery(name = "PlanetModel.findBySurfaceWater", query = "SELECT p FROM PlanetModel p WHERE p.surfaceWater = :surfaceWater"),
-        @NamedQuery(name = "PlanetModel.findByPopulation", query = "SELECT p FROM PlanetModel p WHERE p.population = :population")})
+        @NamedQuery(name = "PlanetModel.findByPopulation", query = "SELECT p FROM PlanetModel p WHERE p.population = :population") })
 public class PlanetModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,8 +68,8 @@ public class PlanetModel implements Serializable {
     @Column(name = "population", nullable = false, length = 255)
     private String population;
     @JoinTable(name = "people_planet", joinColumns = {
-            @JoinColumn(name = "planet_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
-            @JoinColumn(name = "people_id", referencedColumnName = "id", nullable = false)})
+            @JoinColumn(name = "planet_id", referencedColumnName = "id", nullable = false) }, inverseJoinColumns = {
+                    @JoinColumn(name = "people_id", referencedColumnName = "id", nullable = false) })
     @ManyToMany
     private List<PeopleModel> peopleModelList;
     @ManyToMany(mappedBy = "planetModelList")
@@ -83,7 +82,8 @@ public class PlanetModel implements Serializable {
         this.id = id;
     }
 
-    public PlanetModel(Long id, String name, String rotationPeriod, String orbitalPeriod, String diameter, String climate, String gravity, String terrain, String surfaceWater, String population) {
+    public PlanetModel(Long id, String name, String rotationPeriod, String orbitalPeriod, String diameter,
+            String climate, String gravity, String terrain, String surfaceWater, String population) {
         this.id = id;
         this.name = name;
         this.rotationPeriod = rotationPeriod;
