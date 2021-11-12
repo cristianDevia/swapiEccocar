@@ -2,6 +2,7 @@ package com.example.starwars.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -47,12 +50,14 @@ public class MissionModel implements Serializable {
     @Basic(optional = false)
     @Column(name = "crew", nullable = false)
     private int crew;
+    @JoinTable(name = "mission_planet", joinColumns = {
+            @JoinColumn(name = "mission_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "planet_id", referencedColumnName = "id", nullable = false)})
+    @ManyToMany
+    private List<PlanetModel> planetModelList;
     @JoinColumn(name = "fk_people_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private PeopleModel fkPeopleId;
-    @JoinColumn(name = "fk_planets_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private PlanetsModel fkPlanetsId;
     @JoinColumn(name = "fk_starship_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private StarshipModel fkStarshipId;
@@ -103,20 +108,20 @@ public class MissionModel implements Serializable {
         this.crew = crew;
     }
 
+    public List<PlanetModel> getPlanetModelList() {
+        return planetModelList;
+    }
+
+    public void setPlanetModelList(List<PlanetModel> planetModelList) {
+        this.planetModelList = planetModelList;
+    }
+
     public PeopleModel getFkPeopleId() {
         return fkPeopleId;
     }
 
     public void setFkPeopleId(PeopleModel fkPeopleId) {
         this.fkPeopleId = fkPeopleId;
-    }
-
-    public PlanetsModel getFkPlanetsId() {
-        return fkPlanetsId;
-    }
-
-    public void setFkPlanetsId(PlanetsModel fkPlanetsId) {
-        this.fkPlanetsId = fkPlanetsId;
     }
 
     public StarshipModel getFkStarshipId() {

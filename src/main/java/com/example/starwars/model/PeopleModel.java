@@ -12,7 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -65,15 +66,17 @@ public class PeopleModel implements Serializable {
         private String birthYear;
         @Column(name = "gender", length = 255)
         private String gender;
+        @ManyToMany(mappedBy = "peopleModelList")
+        private List<PlanetModel> planetModelList;
+        @JoinTable(name = "starship_people", joinColumns = {
+                @JoinColumn(name = "people_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+                @JoinColumn(name = "starship_id", referencedColumnName = "id", nullable = false)})
+        @ManyToMany
+        private List<StarshipModel> starshipModelList;
+
         @JsonIgnore
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPeopleId")
         private List<MissionModel> missionModelList;
-        @JoinColumn(name = "fk_planets_id", referencedColumnName = "id")
-        @ManyToOne
-        private PlanetsModel fkPlanetsId;
-        @JoinColumn(name = "fk_starship_id", referencedColumnName = "id")
-        @ManyToOne
-        private StarshipModel fkStarshipId;
 
         public PeopleModel() {
         }
@@ -164,28 +167,28 @@ public class PeopleModel implements Serializable {
                 this.gender = gender;
         }
 
+        public List<PlanetModel> getPlanetModelList() {
+                return planetModelList;
+        }
+
+        public void setPlanetModelList(List<PlanetModel> planetModelList) {
+                this.planetModelList = planetModelList;
+        }
+
+        public List<StarshipModel> getStarshipModelList() {
+                return starshipModelList;
+        }
+
+        public void setStarshipModelList(List<StarshipModel> starshipModelList) {
+                this.starshipModelList = starshipModelList;
+        }
+
         public List<MissionModel> getMissionModelList() {
                 return missionModelList;
         }
 
         public void setMissionModelList(List<MissionModel> missionModelList) {
                 this.missionModelList = missionModelList;
-        }
-
-        public PlanetsModel getFkPlanetsId() {
-                return fkPlanetsId;
-        }
-
-        public void setFkPlanetsId(PlanetsModel fkPlanetsId) {
-                this.fkPlanetsId = fkPlanetsId;
-        }
-
-        public StarshipModel getFkStarshipId() {
-                return fkStarshipId;
-        }
-
-        public void setFkStarshipId(StarshipModel fkStarshipId) {
-                this.fkStarshipId = fkStarshipId;
         }
 
         @Override

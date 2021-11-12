@@ -1,19 +1,18 @@
 package com.example.starwars.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,20 +20,20 @@ import javax.persistence.Table;
  * @author CRISTIAN
  */
 @Entity
-@Table(name = "planets", catalog = "starwars", schema = "")
+@Table(name = "planet", catalog = "starwars", schema = "")
 @NamedQueries({
-        @NamedQuery(name = "PlanetsModel.findAll", query = "SELECT p FROM PlanetsModel p"),
-        @NamedQuery(name = "PlanetsModel.findById", query = "SELECT p FROM PlanetsModel p WHERE p.id = :id"),
-        @NamedQuery(name = "PlanetsModel.findByName", query = "SELECT p FROM PlanetsModel p WHERE p.name = :name"),
-        @NamedQuery(name = "PlanetsModel.findByRotationPeriod", query = "SELECT p FROM PlanetsModel p WHERE p.rotationPeriod = :rotationPeriod"),
-        @NamedQuery(name = "PlanetsModel.findByOrbitalPeriod", query = "SELECT p FROM PlanetsModel p WHERE p.orbitalPeriod = :orbitalPeriod"),
-        @NamedQuery(name = "PlanetsModel.findByDiameter", query = "SELECT p FROM PlanetsModel p WHERE p.diameter = :diameter"),
-        @NamedQuery(name = "PlanetsModel.findByClimate", query = "SELECT p FROM PlanetsModel p WHERE p.climate = :climate"),
-        @NamedQuery(name = "PlanetsModel.findByGravity", query = "SELECT p FROM PlanetsModel p WHERE p.gravity = :gravity"),
-        @NamedQuery(name = "PlanetsModel.findByTerrain", query = "SELECT p FROM PlanetsModel p WHERE p.terrain = :terrain"),
-        @NamedQuery(name = "PlanetsModel.findBySurfaceWater", query = "SELECT p FROM PlanetsModel p WHERE p.surfaceWater = :surfaceWater"),
-        @NamedQuery(name = "PlanetsModel.findByPopulation", query = "SELECT p FROM PlanetsModel p WHERE p.population = :population")})
-public class PlanetsModel implements Serializable {
+        @NamedQuery(name = "PlanetModel.findAll", query = "SELECT p FROM PlanetModel p"),
+        @NamedQuery(name = "PlanetModel.findById", query = "SELECT p FROM PlanetModel p WHERE p.id = :id"),
+        @NamedQuery(name = "PlanetModel.findByName", query = "SELECT p FROM PlanetModel p WHERE p.name = :name"),
+        @NamedQuery(name = "PlanetModel.findByRotationPeriod", query = "SELECT p FROM PlanetModel p WHERE p.rotationPeriod = :rotationPeriod"),
+        @NamedQuery(name = "PlanetModel.findByOrbitalPeriod", query = "SELECT p FROM PlanetModel p WHERE p.orbitalPeriod = :orbitalPeriod"),
+        @NamedQuery(name = "PlanetModel.findByDiameter", query = "SELECT p FROM PlanetModel p WHERE p.diameter = :diameter"),
+        @NamedQuery(name = "PlanetModel.findByClimate", query = "SELECT p FROM PlanetModel p WHERE p.climate = :climate"),
+        @NamedQuery(name = "PlanetModel.findByGravity", query = "SELECT p FROM PlanetModel p WHERE p.gravity = :gravity"),
+        @NamedQuery(name = "PlanetModel.findByTerrain", query = "SELECT p FROM PlanetModel p WHERE p.terrain = :terrain"),
+        @NamedQuery(name = "PlanetModel.findBySurfaceWater", query = "SELECT p FROM PlanetModel p WHERE p.surfaceWater = :surfaceWater"),
+        @NamedQuery(name = "PlanetModel.findByPopulation", query = "SELECT p FROM PlanetModel p WHERE p.population = :population")})
+public class PlanetModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,21 +68,22 @@ public class PlanetsModel implements Serializable {
     @Basic(optional = false)
     @Column(name = "population", nullable = false, length = 255)
     private String population;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPlanetsId")
-    private List<MissionModel> missionModelList;
-    @JsonIgnore
-    @OneToMany(mappedBy = "fkPlanetsId")
+    @JoinTable(name = "people_planet", joinColumns = {
+            @JoinColumn(name = "planet_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "people_id", referencedColumnName = "id", nullable = false)})
+    @ManyToMany
     private List<PeopleModel> peopleModelList;
+    @ManyToMany(mappedBy = "planetModelList")
+    private List<MissionModel> missionModelList;
 
-    public PlanetsModel() {
+    public PlanetModel() {
     }
 
-    public PlanetsModel(Long id) {
+    public PlanetModel(Long id) {
         this.id = id;
     }
 
-    public PlanetsModel(Long id, String name, String rotationPeriod, String orbitalPeriod, String diameter, String climate, String gravity, String terrain, String surfaceWater, String population) {
+    public PlanetModel(Long id, String name, String rotationPeriod, String orbitalPeriod, String diameter, String climate, String gravity, String terrain, String surfaceWater, String population) {
         this.id = id;
         this.name = name;
         this.rotationPeriod = rotationPeriod;
@@ -176,20 +176,20 @@ public class PlanetsModel implements Serializable {
         this.population = population;
     }
 
-    public List<MissionModel> getMissionModelList() {
-        return missionModelList;
-    }
-
-    public void setMissionModelList(List<MissionModel> missionModelList) {
-        this.missionModelList = missionModelList;
-    }
-
     public List<PeopleModel> getPeopleModelList() {
         return peopleModelList;
     }
 
     public void setPeopleModelList(List<PeopleModel> peopleModelList) {
         this.peopleModelList = peopleModelList;
+    }
+
+    public List<MissionModel> getMissionModelList() {
+        return missionModelList;
+    }
+
+    public void setMissionModelList(List<MissionModel> missionModelList) {
+        this.missionModelList = missionModelList;
     }
 
     @Override
@@ -202,16 +202,16 @@ public class PlanetsModel implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PlanetsModel)) {
+        if (!(object instanceof PlanetModel)) {
             return false;
         }
-        PlanetsModel other = (PlanetsModel) object;
+        PlanetModel other = (PlanetModel) object;
         return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override
     public String toString() {
-        return "entity.PlanetsModel[ id=" + id + " ]";
+        return "entity.PlanetModel[ id=" + id + " ]";
     }
 
 }

@@ -1,11 +1,13 @@
 package com.example.starwars.service;
 
-import com.example.starwars.model.PlanetsModel;
+import com.example.starwars.model.PlanetModel;
 import com.example.starwars.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class PlanetService {
 
     @Autowired
@@ -15,7 +17,7 @@ public class PlanetService {
         this.planetRepository = planetRepository;
     }
 
-    public PlanetsModel addPlanet(PlanetsModel planetsModel){
-        return  this.planetRepository.save(planetsModel);
+    public PlanetModel addPlanet(PlanetModel planetModel){
+        return  this.planetRepository.save(planetModel);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.starwars.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -12,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -85,12 +85,12 @@ public class StarshipModel implements Serializable {
     @Basic(optional = false)
     @Column(name = "starship_class", nullable = false, length = 255)
     private String starshipClass;
+    @ManyToMany(mappedBy = "starshipModelList")
+    private List<PeopleModel> peopleModelList;
+    
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkStarshipId")
     private List<MissionModel> missionModelList;
-    @JsonIgnore
-    @OneToMany(mappedBy = "fkStarshipId")
-    private List<PeopleModel> peopleModelList;
 
     public StarshipModel() {
     }
@@ -227,20 +227,20 @@ public class StarshipModel implements Serializable {
         this.starshipClass = starshipClass;
     }
 
-    public List<MissionModel> getMissionModelList() {
-        return missionModelList;
-    }
-
-    public void setMissionModelList(List<MissionModel> missionModelList) {
-        this.missionModelList = missionModelList;
-    }
-
     public List<PeopleModel> getPeopleModelList() {
         return peopleModelList;
     }
 
     public void setPeopleModelList(List<PeopleModel> peopleModelList) {
         this.peopleModelList = peopleModelList;
+    }
+
+    public List<MissionModel> getMissionModelList() {
+        return missionModelList;
+    }
+
+    public void setMissionModelList(List<MissionModel> missionModelList) {
+        this.missionModelList = missionModelList;
     }
 
     @Override
