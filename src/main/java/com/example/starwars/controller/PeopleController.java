@@ -24,7 +24,7 @@ public class PeopleController {
     PeopleService peopleService;
 
     @PostMapping
-    public ResponseEntity<PeopleModel> addNewStarship(@RequestBody @Validated PeopleModel peopleModel) {
+    public ResponseEntity<PeopleModel> addNewPeople(@RequestBody @Validated PeopleModel peopleModel) {
         try {
 
             return new ResponseEntity<>(this.peopleService.addPeople(peopleModel), HttpStatus.CREATED);
@@ -35,7 +35,7 @@ public class PeopleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PeopleModel>> listStarship() {
+    public ResponseEntity<List<PeopleModel>> listPeople() {
         try {
             if (this.peopleService.listAll() != null) {
                 return ResponseEntity.ok(this.peopleService.listAll());
@@ -49,7 +49,7 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PeopleModel> findStarship(@PathVariable("id") Long id) {
+    public ResponseEntity<PeopleModel> findPeople(@PathVariable("id") Long id) {
         try {
             if (this.peopleService.searchById(id) != null) {
                 return ResponseEntity.ok(this.peopleService.searchById(id));
@@ -63,7 +63,7 @@ public class PeopleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PeopleModel> updateStarship(@PathVariable("id") Long id,
+    public ResponseEntity<PeopleModel> updatePeople(@PathVariable("id") Long id,
             @RequestBody @Validated PeopleModel peopleModel) {
         try {
             PeopleModel auxPeople = this.peopleService.searchById(id);
