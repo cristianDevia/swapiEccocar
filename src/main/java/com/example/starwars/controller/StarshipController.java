@@ -81,6 +81,8 @@ public class StarshipController {
                 auxStarship.setHyperdriveRating(starshipModel.getHyperdriveRating());
                 auxStarship.setMGLT(starshipModel.getMGLT());
                 auxStarship.setStarshipClass(starshipModel.getStarshipClass());
+                auxStarship.setPeopleModelList(starshipModel.getPeopleModelList());
+                auxStarship.setMissionModelList(starshipModel.getMissionModelList());
             }
             return new ResponseEntity<>(this.starshipService.updateStarship(auxStarship), HttpStatus.OK);
         } catch (Exception e) {

@@ -77,6 +77,9 @@ public class PeopleController {
                 auxPeople.setBirthYear(peopleModel.getBirthYear());
                 auxPeople.setHairColor(peopleModel.getHairColor());
                 auxPeople.setGender(peopleModel.getGender());
+                auxPeople.setPlanetModelList(peopleModel.getPlanetModelList());
+                auxPeople.setMissionModelList(peopleModel.getMissionModelList());
+                auxPeople.setStarshipModelList(peopleModel.getStarshipModelList());
             }
             return new ResponseEntity<>(this.peopleService.updatePeople(auxPeople), HttpStatus.OK);
         } catch (Exception e) {

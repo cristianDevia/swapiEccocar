@@ -82,6 +82,8 @@ public class PlanetController {
                 auxPlanet.setTerrain(planetModel.getTerrain());
                 auxPlanet.setSurfaceWater(planetModel.getSurfaceWater());
                 auxPlanet.setPopulation(planetModel.getPopulation());
+                auxPlanet.setPeopleModelList(planetModel.getPeopleModelList());
+                auxPlanet.setMissionModelList(planetModel.getMissionModelList());
             }
             return new ResponseEntity<>(this.planetService.updatePlanet(auxPlanet), HttpStatus.OK);
         } catch (Exception e) {
